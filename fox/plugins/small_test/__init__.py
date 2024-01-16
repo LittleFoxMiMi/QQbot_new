@@ -7,14 +7,14 @@ import time
 from fox.check import qq_check
 
 test = on_command("test", rule=to_me(), aliases={"测试"}, block=True)
-CQ = on_command("CQ", rule=to_me, block=True)
+Echo = on_command("echo", rule=to_me, block=True)
 
 super_user = "./fox/data/config/superuser.txt"
 
 
 @test.handle()
 async def _(bot: Bot, event: Event, state: T_State):
-    if not await qq_check(event.user_id, super_user):
+    if not await qq_check(event.get_user_id(), super_user):
         await test.finish("雪豹闭嘴")
     args = str(event.get_message()).strip().split(" ")
     args = args[1:]
@@ -39,15 +39,12 @@ async def test_mission(par):
         return "错误的参数"
 
 
-@CQ.handle()
+@Echo.handle()
 async def _(bot: Bot, event: Event, msg: Message = CommandArg()):
-    if not await qq_check(event.user_id, super_user):
-        await CQ.finish("雪豹闭嘴")
+    if not await qq_check(event.get_user_id(), super_user):
+        await Echo.finish("雪豹闭嘴")
     msg = str(msg).strip()
     if msg == "":
-        await CQ.finish("女子")
+        await Echo.finish("女子")
     else:
-        msg = msg[5:]
-        msg = '['+msg[:-5]+']'
-        print(msg)
-        await bot.call_api(api="send_group_msg",  group_id=event.group_id, message=msg)
+        await Echo.finish(msg)
