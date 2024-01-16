@@ -1,9 +1,9 @@
 from nonebot import on_command
 from nonebot.rule import to_me
 from nonebot.typing import T_State
-from nonebot.adapters.onebot.v11 import Bot, Event
+from nonebot.adapters import Bot, Event
 from nonebot.params import CommandArg
-from nonebot.adapters.onebot.v11 import MessageEvent, Message, Bot
+from nonebot.adapters import MessageEvent, Message, Bot
 import time
 from fox.check import qq_check
 
@@ -16,7 +16,7 @@ super_user = "./fox/data/config/superuser.txt"
 @test.handle()
 async def _(bot: Bot, event: Event, state: T_State):
     if not await qq_check(event.user_id, super_user):
-        await say.finish("雪豹闭嘴")
+        await test.finish("雪豹闭嘴")
     args = str(event.get_message()).strip().split(" ")
     args = args[1:]
     if len(args) != 0:
@@ -48,7 +48,7 @@ async def _(bot: Bot, event: MessageEvent, msg: Message = CommandArg()):
     if msg == "":
         await CQ.finish("女子")
     else:
-        msg=msg[5:]
-        msg='['+msg[:-5]+']'
+        msg = msg[5:]
+        msg = '['+msg[:-5]+']'
         print(msg)
         await bot.call_api(api="send_group_msg",  group_id=event.group_id, message=msg)
