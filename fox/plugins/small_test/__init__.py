@@ -47,6 +47,6 @@ async def _(bot: Bot, event: Event, msg: Message = CommandArg()):
     if msg == "":
         await Echo.finish("女子")
     else:
-        await bot.send(msg)
+        await Echo.send(msg)
         await bot.call_api("sendMessage", msg)
         await Echo.finish(msg)
