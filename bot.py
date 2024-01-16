@@ -2,7 +2,8 @@
 # -*- coding: utf-8 -*-
 
 import nonebot
-from nonebot.adapters.onebot.v11 import Adapter as OneBotV11Adapter
+# 引用 nonebot_adapter_mirai2
+from nonebot.adapters.mirai2 import Adapter as MIRAI2Adapter
 
 
 # Custom your logger
@@ -19,7 +20,7 @@ nonebot.init()
 app = nonebot.get_asgi()
 
 driver = nonebot.get_driver()
-driver.register_adapter(OneBotV11Adapter)
+driver.register_adapter(MIRAI2Adapter)
 
 
 nonebot.load_builtin_plugins()
