@@ -1,9 +1,8 @@
 from nonebot import on_command
 from nonebot.rule import to_me
 from nonebot.typing import T_State
-from nonebot.adapters import Bot, Event
+from nonebot.adapters import Bot, Event, Message, Bot
 from nonebot.params import CommandArg
-from nonebot.adapters import MessageEvent, Message, Bot
 import time
 from fox.check import qq_check
 
@@ -41,7 +40,7 @@ async def test_mission(par):
 
 
 @CQ.handle()
-async def _(bot: Bot, event: MessageEvent, msg: Message = CommandArg()):
+async def _(bot: Bot, event: Event, msg: Message = CommandArg()):
     if not await qq_check(event.user_id, super_user):
         await CQ.finish("雪豹闭嘴")
     msg = str(msg).strip()
